@@ -1,6 +1,8 @@
 package com.example.kevin.buzzersystem;
 
+import android.media.AudioManager;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +24,7 @@ import java.util.List;
 public class BuzzerActivity extends AppCompatActivity {
     List<ImageView> buttons = new ArrayList<ImageView>();
     boolean lockout = false;
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public class BuzzerActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         buttons = Arrays.asList((ImageView) findViewById(R.id.button1), (ImageView) findViewById((R.id.button2)), (ImageView) findViewById(R.id.button3), (ImageView) findViewById(R.id.button4));
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.buzzer);
     }
 
     public void pushed(View view) {
@@ -37,6 +43,7 @@ public class BuzzerActivity extends AppCompatActivity {
             ImageView imageview = (ImageView) view;
             imageview.setImageResource(R.drawable.pressed);
             lockout = true;
+            mp.start();
         }
     }
 
