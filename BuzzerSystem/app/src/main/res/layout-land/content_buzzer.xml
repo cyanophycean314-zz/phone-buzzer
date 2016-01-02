@@ -23,9 +23,10 @@
                 android:orientation="vertical"
                 android:layout_marginRight="5dp">
                 <TextView
+                    android:id="@+id/player1title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p1"/>
+                    android:hint="@string/p1"/>
 
                 <ImageView
                     android:id="@+id/button1"
@@ -43,9 +44,10 @@
                 android:orientation="vertical"
                 android:layout_marginRight="5dp">
                 <TextView
+                    android:id="@+id/player2title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p2"/>
+                    android:hint="@string/p2"/>
 
                 <ImageView
                     android:id="@+id/button2"
@@ -63,9 +65,10 @@
                 android:orientation="vertical"
                 android:layout_marginRight="5dp">
                 <TextView
+                    android:id="@+id/player3title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p3"/>
+                    android:hint="@string/p3"/>
 
                 <ImageView
                     android:id="@+id/button3"
@@ -82,9 +85,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/player4title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/p4"/>
+                    android:hint="@string/p4"/>
 
                 <ImageView
                     android:id="@+id/button4"

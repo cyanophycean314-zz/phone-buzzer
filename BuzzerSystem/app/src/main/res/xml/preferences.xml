@@ -7,5 +7,29 @@
         android:summary="Toggle buzzing noises"
         android:defaultValue="true"
         />
+    <EditTextPreference
+        android:key="p1name"
+        android:title="Player 1 Name"
+        android:summary="%s"
+        android:defaultValue="Player 1"
+        />
+    <EditTextPreference
+        android:key="p2name"
+        android:title="Player 2 Name"
+        android:summary="%s"
+        android:defaultValue="Player 2"
+        />
+    <EditTextPreference
+        android:key="p3name"
+        android:title="Player 3 Name"
+        android:summary="%s"
+        android:defaultValue="Player 3"
+        />
+    <EditTextPreference
+        android:key="p4name"
+        android:title="Player 4 Name"
+        android:summary="%s"
+        android:defaultValue="Player 4"
+        />
 
 </PreferenceScreen>

@@ -18,6 +18,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -25,9 +28,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BuzzerActivity extends AppCompatActivity {
-    List<ImageView> buttons = new ArrayList<ImageView>();
+    List<View> buttons = new ArrayList<View>();
+    List<View> titles = new ArrayList<>();
     boolean lockout = false;
     MediaPlayer mp;
+    boolean soundon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +40,13 @@ public class BuzzerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buzzer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        buttons = Arrays.asList((ImageView) findViewById(R.id.button1), (ImageView) findViewById((R.id.button2)), (ImageView) findViewById(R.id.button3), (ImageView) findViewById(R.id.button4));
+        buttons = Arrays.asList(findViewById(R.id.button1), findViewById((R.id.button2)), findViewById(R.id.button3), findViewById(R.id.button4));
+        titles = Arrays.asList(findViewById(R.id.player1title), findViewById(R.id.player2title), findViewById(R.id.player3title), findViewById(R.id.player4title));
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mp = MediaPlayer.create(getApplicationContext(), R.raw.buzzer);
+
+        onResume();
     }
 
     public void pushed(View view) {
@@ -47,17 +55,32 @@ public class BuzzerActivity extends AppCompatActivity {
             ImageView imageview = (ImageView) view;
             imageview.setImageResource(R.drawable.pressed);
             lockout = true;
-            if (sharedPref.getBoolean("sound",true)) {
+            if (soundon) {
                 mp.start();
             }
         }
     }
 
     public void clear(View view) {
-        for (ImageView imageview : buttons) {
+        for (View iview : buttons) {
+            ImageView imageview = (ImageView) iview;
             imageview.setImageResource(R.drawable.unpressed);
         }
         lockout = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Load settings
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        soundon = sharedPref.getBoolean("sound",true);
+
+        for (int i = 0; i < titles.size(); i++) {
+            TextView title = (TextView) titles.get(i);
+            title.setText(sharedPref.getString("p" + (i + 1) + "name","Dank bro " + (i + 1)));
+        }
     }
 
     @Override
