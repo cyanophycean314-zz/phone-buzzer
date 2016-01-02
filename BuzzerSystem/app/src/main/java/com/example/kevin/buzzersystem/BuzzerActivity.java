@@ -1,10 +1,13 @@
 package com.example.kevin.buzzersystem;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,11 +42,14 @@ public class BuzzerActivity extends AppCompatActivity {
     }
 
     public void pushed(View view) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         if (!lockout) {
             ImageView imageview = (ImageView) view;
             imageview.setImageResource(R.drawable.pressed);
             lockout = true;
-            mp.start();
+            if (sharedPref.getBoolean("sound",true)) {
+                mp.start();
+            }
         }
     }
 
@@ -70,7 +76,8 @@ public class BuzzerActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
